@@ -1,0 +1,19 @@
+<section class="rating">
+    <div class="container">
+        <h4 class="title">Qual a probabilidade de você recomendar o Lejour para outra pessoa?</h4>
+
+        <ul class="listscore">
+            <li class="itemscore" [class.-active]="i <= currentHoverScore" *ngFor="let item of listScore; let i = index" (mouseover)="currentHoverScore = i"></li>
+        </ul> <!-- /.listscore -->
+
+        <div class="bottom">
+            <div class="indicator">Não recomendaria</div>
+            <div class="indicator">Recomendaria com certeza</div>
+        </div> <!-- /.bottom -->
+
+    </div> <!-- /.container -->
+</section> <!-- /.rating -->
+
+<app-modal [active]="modalActive" (close)="closeModal()">
+    
+</app-modal>

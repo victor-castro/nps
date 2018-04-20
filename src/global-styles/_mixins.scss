@@ -1,0 +1,99 @@
+// ==========================================================================
+// Base
+// ==========================================================================
+
+
+// Varíaveis
+// ==========================================================================
+$container: 1300px; // Tamanho do container
+
+$colors: (
+    bg_body: #262524,
+    gray: #dfdfdf,
+    orange: #f9690e
+) !default;
+
+
+// Fontes
+// ==========================================================================
+
+
+@mixin default-font() { // normal, 400, bold 
+    font-family: 'Lato', sans-serif;
+}
+
+// Mixins
+// ==========================================================================
+@mixin transform($param, $param2: null, $param3: null) {
+    transform: $param $param2 $param3;
+    -ms-transform: $param $param2 $param3;
+    -webkit-transform: $param $param2 $param3;
+}
+
+@mixin transition($param) {
+    -webkit-transition: $param;
+    transition: $param;
+}
+
+@mixin opacity($param) {
+    opacity: $param / 100;
+    filter: alpha(opacity=$param);
+}
+
+@mixin position($position, $args: ()) {
+    $offsets: top right bottom left;
+    position: $position;
+
+    @each $offset in $offsets {
+        $index: index($args, $offset);
+
+        @if $index {
+            @if $index == length($args) {
+                #{$offset}: 0;
+                #{$offset}: 0;
+            } @else {
+                $next: nth($args, $index + 1);
+
+                @if is-valid-length($next) {
+                    #{$offset}: $next;
+                } @else if index($offsets, $next) {
+                    #{$offset}: 0;
+                } @else {
+                    @warn "Valor inválido `#{$next}` para offset `#{$offset}`.";
+                }
+            }
+        }
+    }
+}
+
+@mixin absolute($args: ()) {
+    @include position(absolute, $args);
+}
+
+@mixin fixed($args: ()) {
+    @include position(fixed, $args);
+}
+
+@mixin relative($args: ()) {
+    @include position(relative, $args);
+}
+
+@mixin size($width, $height: $width) {
+    width: $width;
+    height: $height;
+}
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content; 
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  } 
+}

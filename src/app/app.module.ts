@@ -9,13 +9,17 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 
 import { GeralService } from './providers/geral.service'
-import { GlobalSettings } from './global.settings'
+import { GlobalSettings } from './global.settings';
+import { RatingComponent } from './components/rating/rating.component';
+import { ModalComponent } from './components/modal/modal.component'
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    RatingComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

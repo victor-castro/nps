@@ -1,0 +1,7 @@
+<div id="overlay" class="" [class.active]="active" (click)="closeModal()"></div>
+<div class="modal" [class.-active]="active">
+    <a href="javascript:void(0)" class="close" (click)="closeModal()">✕</a>
+
+    <ng-content></ng-content>
+</div> <!-- /.modal -->
+

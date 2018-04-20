@@ -13,16 +13,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
 
-  	this.geralService
-  		.auth()
-  		.subscribe(
-			res => {
-				console.log(res);
-
-	  		}, err => {
-	  			console.log(err);
-	  		});
-
   }
 
 }
