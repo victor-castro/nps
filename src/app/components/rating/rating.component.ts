@@ -1,4 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
+
+import { GeralService } from '../../providers/geral.service'
 
 @Component({
   selector: 'app-rating',
@@ -9,9 +11,19 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 export class RatingComponent implements OnInit {
   listScore: Array<number> = [];
   currentHoverScore: number;
-  modalActive: boolean = true;
+  modalActive: boolean = false;
+  commentHeight: any = 1;
+  baseScrollHeight: any;
+  commentValue: string;
+  lengthCharactes: number = 0;
+  btnDisabled: boolean = true;
+  modalMsg: boolean = false;
+  score: number;
+  emoji: string;
+  chaveNps: any;
+  hideRating: boolean = false;
 
-  constructor() { }
+  constructor(public geralService: GeralService) { }
 
   ngOnInit() {
     this.listScore = new Array(11);
@@ -23,6 +35,61 @@ export class RatingComponent implements OnInit {
 
   closeModal() {
     this.modalActive = false;
+  }
+
+  countCharacter(ev) {
+    this.lengthCharactes = ev.target.value.length;
+    this.btnDisabled = this.lengthCharactes > 3 ? false : true;
+  }
+
+
+  getEmoji(score) {
+    let emoji;
+    if (score <= 6) emoji = 'ap-pensive';
+    if (score >= 7 && score <= 8) emoji = 'ap-blush';
+    if (score >= 9) emoji = 'ap-smiley';
+
+    return emoji;
+  }
+
+  getScore(score: number) {
+    this.score = score;
+    this.emoji = this.getEmoji(score);
+    this.modalActive = true;
+  }
+
+  sendComment() {
+    this.modalMsg = true;
+
+    // Grava o Score
+    this.geralService.registryScore(this.score).subscribe(
+      response => { 
+        this.chaveNps = response.data.id;
+
+        let data = new Object({
+          id: this.chaveNps,
+          comment: this.commentValue
+        })
+
+        // Grava o Comentario
+        this.geralService.registryScore('', data).subscribe(
+
+          response => { 
+            console.log(response);
+            this.hideRating = true;
+          },
+          err => { console.log(err)}
+
+          
+
+        )// Grava o Comentario
+
+      },
+
+      err => { console.log(err) }
+      
+    )// Grava o Score
+
   }
 
 }

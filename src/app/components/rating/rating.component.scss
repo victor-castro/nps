@@ -103,6 +103,35 @@ $itemscoreSize: 15px;
 
 .modalcontent {
 
+  > .title {
+    font-family: serif;
+    font-weight: 600;
+    font-size: 32px;
+  } //> .title
+
+  > .btn {
+    height: 40px;
+    line-height: 40px;
+    text-transform: uppercase;
+    color: white;
+    background-color: #81d8d0;
+    padding: 0 25px;
+    border-radius: 4px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+
+    &:not(:disabled):hover { opacity: .8; }
+
+    &:disabled {
+      color: #b0b0b0;
+      background-color: #ececec;
+      cursor: none; 
+      cursor: no-drop;
+    } //&:disabled
+
+  } //> .btn
+
   &.-comment {
 
     > .headermodal {
@@ -116,13 +145,14 @@ $itemscoreSize: 15px;
       border-radius: 10px;
       background: linear-gradient(180deg, #d66960 0, lighten(#d66960, 13%) 100%);/* W3C */
 
-      > .titlescore {
-        font-family: serif;
-        font-weight: 600;
-        color: white;
-        font-size: 32px;
-        margin-bottom: 15px;
-      } //> .titlescore
+      > .title {
+
+        &.-score {
+          color: white;
+          margin-bottom: 15px;
+        } //> &.-score
+
+      } //> .title
 
     } //.headermodal
 
@@ -135,48 +165,38 @@ $itemscoreSize: 15px;
 
     > .groupfield {
       margin-bottom: 90px;
+      border-bottom: 2px solid #dddddd;
 
       > .fieldcomment {
         border: none;
-        padding-top: 15px;
-        border-bottom: 2px solid #dddddd;
         color: #000;
-        min-height: 45px;
         width: 100%;
-        margin-bottom: 7px;
+        overflow: hidden;
+        margin-bottom: 10px;
       } //> .fieldcomment
 
       > .characteslimit {
         float: right;
         font-size: 12px;
+        margin-top: 10px;
       } //> .characteslimit
 
     } //.groupinput
 
-    > .btn {
-      height: 40px;
-      line-height: 40px;
-      text-transform: uppercase;
-      color: white;
-      background-color: #81d8d0;
-      padding: 0 25px;
-      border-radius: 4px;
-      position: relative;
-      left: 50%;
-      transform: translateX(-50%);
-
-      &:not(:disabled):hover { opacity: .8; }
-
-      &:disabled {
-        color: #b0b0b0;
-        background-color: #ececec;
-        cursor: none; 
-        cursor: no-drop;
-      } //&:disabled
-
-    } //> .btn
-
   } //&.comment
+
+  &.-msg {
+
+    > .title,
+    > .text {
+      text-align: center;
+    }
+
+    > .title { margin-bottom: 30px; } 
+
+    > .text { margin-bottom: 35px; }
+
+  } //&.-msg
 
 } //.modalcontent
 

@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class GlobalSettings {
-    // URL: string = 'https://api.github.com/frontendbr/vagas/issues';
-    URL: string = 'https://api.github.com/';
+    urlRegistry: string = 'https://staging-api.lejour.com.br/portal/api/v2/nps/';
 
     constructor() {}
 }

@@ -1,9 +1,9 @@
-<section class="rating">
+<section class="rating" *ngIf="!hideRating">
     <div class="container">
         <h4 class="title">Qual a probabilidade de você recomendar o Lejour para outra pessoa? </h4>
         
         <ul class="listscore">
-            <li class="itemscore" [class.-active]="i <= currentHoverScore" *ngFor="let item of listScore; let i = index" (mouseover)="currentHoverScore = i"></li>
+            <li class="itemscore" (click)="getScore(i)" [class.-active]="i <= currentHoverScore" *ngFor="let item of listScore; let i = index" (mouseover)="currentHoverScore = i"></li>
         </ul> <!-- /.listscore -->
 
         <div class="bottom">
@@ -14,25 +14,39 @@
     </div> <!-- /.container -->
 </section> <!-- /.rating -->
 
-<app-modal [active]="modalActive" (close)="closeModal()">
-    <div class="modalcontent -comment">
+<app-modal [active]="modalActive" [small]="modalMsg" (close)="closeModal()">
+    <div class="modalcontent -comment" *ngIf="!modalMsg">
         <div class="headermodal">
-            <h2 class="titlescore">Você nos deu nota 10!</h2>
+            <h2 class="title -score">Você nos deu nota {{ score }}!</h2>
              <!-- <div class="ap ap-pensive"></div> -->
-            <!-- <div class="ap ap-smile"></div> -->
+            <div class="ap" [ngClass]="emoji"></div>
             <!-- <div class="ap ap-blush"></div> -->
-            <div class="ap ap-wink"></div>
+            <!-- <div class="ap ap-wink"></div> -->
             <!-- <div class="ap ap-smiley"></div>  -->
         </div> <!-- /.headermodal -->
 
         <h5 class="text">Dica? Reclamação? Só um obrigado? <br> Pode escrever aqui pra gente!</h5>
 
         <div class="groupfield">
-            <textarea name="msg" class="fieldcomment" placeholder="Seu comentário"></textarea>
-            <small class="characteslimit">0 de 140 caracteres</small>
+            <textarea maxlength="140" [(ngModel)]="commentValue" (keyup)="countCharacter($event)" name="commentValue" auto-height class="fieldcomment" placeholder="Seu comentário"></textarea>
+            <small class="characteslimit"> {{ lengthCharactes }} de 140 caracteres</small>
         </div> <!-- /.groupinput -->
 
-        <button class="btn" disabled>Enviar comentario</button>
+        <button class="btn" (click)="sendComment()" [disabled]="btnDisabled">Enviar comentario</button>
 
-    </div> <!-- /.wrapcontent -->
+    </div> <!-- /.modalcontent -->
+
+    <div class="modalcontent -msg" *ngIf="modalMsg">
+        
+        <h2 class="title -msg">Muito Obrigado!</h2>
+
+        <div class="text">
+            Sua opinião é muito importante para nós, de <br>
+            verdade! É a partir de comentários como o seu <br>
+            que nos reinventamos para melhorar e ajudar <br>
+            cada vez mais noivas em suas jornadas.
+        </div> <!-- /.text -->
+
+        <button class="btn" (click)="closeModal()">Fechar</button>
+    </div> <!-- /.modalcontent -->
 </app-modal>

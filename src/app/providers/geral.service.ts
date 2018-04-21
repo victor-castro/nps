@@ -7,23 +7,39 @@ import 'rxjs/Rx';
 @Injectable()
 export class GeralService {
     http: any;
-    headers: Headers;
 
     constructor(http: Http, private settings: GlobalSettings) {
         this.http = http;
-        this.headers = new Headers();
     }
 
-    auth() {
-        let url = 'https://api.github.com/login/oauth/authorize';
+    registryScore(score: any = '', comment: any = '') {
+        let data: Object;
 
-        return this.http.get(url).map(res => res.json());
-    }
+        if(score) {
+            console.log('score')
+            data = new Object({
+                score: score
+            })
+        }
 
-    getIssue() {
-        // let url = 'https://api.github.com/users/frontendbr/repos';
-        let url = 'https://api.github.com/users/frontendbr/repos?page=1&per_page=20';
+        if(comment) {
+            console.log('comentario')
+            data= new Object({
+                id: comment.id,
+                comment: comment.comment
+            })
+        }
 
-        return this.http.get(url).map(res => res.json());
+        let params = JSON.stringify(data);
+
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        let options = new RequestOptions({
+          headers: headers
+        });
+
+        return this.http.post(this.settings.urlRegistry, params, options).map(res => res.json())
+
     }
 }

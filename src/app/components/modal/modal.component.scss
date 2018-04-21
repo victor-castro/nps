@@ -14,6 +14,9 @@
     z-index: 1050;
     opacity: 0;
     pointer-events: none;
+    transition: .2s all ease;
+
+    &.-small { max-width: 510px; }
 
     &.-active {
         transform: translate(-50%, -50%) scale(1);
