@@ -1,7 +1,7 @@
 <section class="rating">
     <div class="container">
-        <h4 class="title">Qual a probabilidade de você recomendar o Lejour para outra pessoa?</h4>
-
+        <h4 class="title">Qual a probabilidade de você recomendar o Lejour para outra pessoa? </h4>
+        
         <ul class="listscore">
             <li class="itemscore" [class.-active]="i <= currentHoverScore" *ngFor="let item of listScore; let i = index" (mouseover)="currentHoverScore = i"></li>
         </ul> <!-- /.listscore -->
@@ -15,5 +15,24 @@
 </section> <!-- /.rating -->
 
 <app-modal [active]="modalActive" (close)="closeModal()">
-    
+    <div class="modalcontent -comment">
+        <div class="headermodal">
+            <h2 class="titlescore">Você nos deu nota 10!</h2>
+             <!-- <div class="ap ap-pensive"></div> -->
+            <!-- <div class="ap ap-smile"></div> -->
+            <!-- <div class="ap ap-blush"></div> -->
+            <div class="ap ap-wink"></div>
+            <!-- <div class="ap ap-smiley"></div>  -->
+        </div> <!-- /.headermodal -->
+
+        <h5 class="text">Dica? Reclamação? Só um obrigado? <br> Pode escrever aqui pra gente!</h5>
+
+        <div class="groupfield">
+            <textarea name="msg" class="fieldcomment" placeholder="Seu comentário"></textarea>
+            <small class="characteslimit">0 de 140 caracteres</small>
+        </div> <!-- /.groupinput -->
+
+        <button class="btn" disabled>Enviar comentario</button>
+
+    </div> <!-- /.wrapcontent -->
 </app-modal>
