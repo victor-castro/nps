@@ -12,7 +12,7 @@ export class GeralService {
         this.http = http;
     }
 
-    registryScore(score: any = '', comment: any = '') {
+    registerScore(score: any = '', comment: any = '') {
         let data: Object;
 
         if(score) {
@@ -24,7 +24,7 @@ export class GeralService {
 
         if(comment) {
             console.log('comentario')
-            data= new Object({
+            data = new Object({
                 id: comment.id,
                 comment: comment.comment
             })
@@ -39,7 +39,12 @@ export class GeralService {
           headers: headers
         });
 
-        return this.http.post(this.settings.urlRegistry, params, options).map(res => res.json())
+        return this.http.post(this.settings.urlRegister, params, options).map(res => res.json())
 
+    }
+
+    getScore() {
+
+        return this.http.get(this.settings.urlRegister).map(res => res.json())
     }
 }

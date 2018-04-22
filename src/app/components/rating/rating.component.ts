@@ -18,7 +18,7 @@ export class RatingComponent implements OnInit {
   lengthCharactes: number = 0;
   btnDisabled: boolean = true;
   modalMsg: boolean = false;
-  score: number;
+  score: string;
   emoji: string;
   chaveNps: any;
   hideRating: boolean = false;
@@ -53,7 +53,7 @@ export class RatingComponent implements OnInit {
   }
 
   getScore(score: number) {
-    this.score = score;
+    this.score = score.toString();
     this.emoji = this.getEmoji(score);
     this.modalActive = true;
   }
@@ -62,7 +62,7 @@ export class RatingComponent implements OnInit {
     this.modalMsg = true;
 
     // Grava o Score
-    this.geralService.registryScore(this.score).subscribe(
+    this.geralService.registerScore(this.score).subscribe(
       response => { 
         this.chaveNps = response.data.id;
 
@@ -72,7 +72,7 @@ export class RatingComponent implements OnInit {
         })
 
         // Grava o Comentario
-        this.geralService.registryScore('', data).subscribe(
+        this.geralService.registerScore('', data).subscribe(
 
           response => { 
             console.log(response);

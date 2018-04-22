@@ -13,7 +13,8 @@ import { GeralService } from './providers/geral.service'
 import { GlobalSettings } from './global.settings';
 import { RatingComponent } from './components/rating/rating.component';
 import { ModalComponent } from './components/modal/modal.component';
-import { AutoGrowDirective } from './directives/auto-grow.directive'
+import { AutoGrowDirective } from './directives/auto-grow.directive';
+import { ResultComponent } from './pages/result/result.component'
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { AutoGrowDirective } from './directives/auto-grow.directive'
     HomeComponent,
     RatingComponent,
     ModalComponent,
-    AutoGrowDirective
+    AutoGrowDirective,
+    ResultComponent
   ],
   imports: [
     BrowserModule,

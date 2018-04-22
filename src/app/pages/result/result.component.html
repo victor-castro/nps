@@ -1,0 +1,41 @@
+<div class="wrapgraphic">
+    <div class="container">
+        <h2 class="title">NPS Controle</h2>
+
+        <div class="graphicbar">
+            <div [ngStyle]="{ 'width.%' : percents.detractors }" class="bar -detractors"></div>
+            <div [ngStyle]="{ 'width.%' : percents.neutros }" class="bar -neutros"></div>
+            <div [ngStyle]="{ 'width.%' : percents.promoters }" class="bar -promoters"></div>
+        </div> <!-- /.graphicbar -->
+
+        <div class="legend">
+
+            <ul class="list">
+                <li class="item"><div class="square -detractors"></div>{{ (percents.detractors | number : '1.2-2')  + '%' }} Detratores</li>
+                <li class="item"><div class="square -neutros"></div>{{ (percents.neutros | number : '1.2-2')  + '%' }} Neutros</li>
+                <li class="item"><div class="square -promoters"></div>{{ (percents.promoters | number : '1.2-2')  + '%' }} Promotores</li>
+            </ul> <!-- /.list -->
+
+        </div> <!-- /.legend -->
+
+        <div class="npsinfos">
+
+            <h3 class="title">Resultado NPS: {{ npsResult > 0 ? '+' + npsResult : npsResult  }}</h3>
+
+            <div class="barnps">
+                <div class="cursor" [ngStyle]="{ 'left.%' : npsCursor }"></div>
+            </div> <!-- /.barnps -->
+
+            <div class="bottom">
+                <div class="indicator">-100</div>
+                <div class="indicator">0</div>
+                <div class="indicator">100</div>
+            </div> <!-- /.bottom -->
+
+
+            <h5 class="total">Total de pessoas que votaram: <strong>{{ totalVotos }}</strong></h5>
+
+        </div> <!-- /.npsinfos -->
+
+    </div> <!-- /.container -->
+</div> <!-- /.wrapgraphic -->
